@@ -7,6 +7,7 @@ import { Orders } from './pages/Orders.tsx';
 import Menu from './pages/Menu.tsx';
 import { NewDish } from './pages/NewDish.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
+import firebase, { FirebaseContext } from './firebase'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <FirebaseContext.Provider value={firebase}>
+      <RouterProvider router={router} />
+    </FirebaseContext.Provider>
   </React.StrictMode>,
 )
