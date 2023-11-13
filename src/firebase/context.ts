@@ -1,23 +1,13 @@
+import { createContext } from "react";
+import firebase from ".";
 import { FirebaseApp } from "firebase/app";
-import React, { createContext } from "react";
+import { Firestore } from "firebase/firestore";
 
-export const FirebaseContext = createContext({} as FirebaseApp);
+interface firebase {
+    app?: FirebaseApp;
+    db?: Firestore;
+}
 
-// export default function Firebase() {
-//     return (
-//         P
-//     )
-// }
-// // // Context.tsx
+const FirebaseContext = createContext(firebase)
 
-// export const AppContext = React.createContext({} as ValueProp); //create the context API
-
-// //function body
-// export default function Context({ children }: ContextProp) {
-
-//    
-// }
-
-// export const useGlobalContext = ():ValueProp => {
-//     return useContext(AppContext);
-// }
+export default FirebaseContext

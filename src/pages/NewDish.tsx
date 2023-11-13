@@ -1,8 +1,12 @@
 import { useFormik } from "formik"
 import { categories } from "../variables"
 import * as Yup from 'yup';
+import useFirebase from "../hooks/useFirebase";
 
 export const NewDish = () => {
+
+  const firebase = useFirebase()
+  console.log(firebase)
 
   const formik = useFormik({
     initialValues: {
