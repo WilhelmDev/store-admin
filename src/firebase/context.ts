@@ -8,6 +8,6 @@ interface firebase {
     db?: Firestore;
 }
 
-const FirebaseContext = createContext(firebase)
+const FirebaseContext = createContext<firebase>({})
 
 export default FirebaseContext

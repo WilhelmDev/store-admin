@@ -2,11 +2,12 @@ import { useFormik } from "formik"
 import { categories } from "../variables"
 import * as Yup from 'yup';
 import useFirebase from "../hooks/useFirebase";
+import { useEffect } from "react";
+import { Firestore, addDoc, collection } from "firebase/firestore";
 
 export const NewDish = () => {
 
-  const firebase = useFirebase()
-  console.log(firebase)
+  const { db } = useFirebase()
 
   const formik = useFormik({
     initialValues: {
@@ -30,8 +31,13 @@ export const NewDish = () => {
         .required('La descripcion del platillo es obligatoria'),
 
     }),
-    onSubmit: data => {
-      console.log(data);
+    onSubmit: async dish => {
+      try {
+        const doc = await addDoc(collection(db as Firestore, "products"), dish)
+        console.log(doc)
+      } catch (error) {
+        console.log(error)
+      }
     }
   })
 
