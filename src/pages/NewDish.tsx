@@ -2,7 +2,6 @@ import { useFormik } from "formik"
 import { categories } from "../variables"
 import * as Yup from 'yup';
 import useFirebase from "../hooks/useFirebase";
-import { useEffect } from "react";
 import { Firestore, addDoc, collection } from "firebase/firestore";
 
 export const NewDish = () => {
@@ -15,7 +14,8 @@ export const NewDish = () => {
       price: '',
       category: '',
       image: '',
-      description: ''
+      description: '',
+      existency: true
     },
     validationSchema: Yup.object({
       name: Yup.string()
