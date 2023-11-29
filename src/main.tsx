@@ -47,9 +47,9 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <>
     <FirebaseContext.Provider value={firebase}>
       <RouterProvider router={router} />
     </FirebaseContext.Provider>
-  </React.StrictMode>,
+  </>,
 )

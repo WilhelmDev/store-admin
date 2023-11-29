@@ -3,10 +3,15 @@ import { categories } from "../variables"
 import * as Yup from 'yup';
 import useFirebase from "../hooks/useFirebase";
 import { Firestore, addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router";
+import { useFileUpload } from 'react-firebase-file-upload'
+import { FirebaseStorage } from "firebase/storage";
+import { useEffect } from "react";
 
 export const NewDish = () => {
 
-  const { db } = useFirebase()
+  const { db, storage } = useFirebase()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -35,11 +40,45 @@ export const NewDish = () => {
       try {
         const doc = await addDoc(collection(db as Firestore, "products"), dish)
         console.log(doc)
+        //? Redirect after save data
+        navigate('/menu')
       } catch (error) {
         console.log(error)
       }
     }
   })
+
+  const _input = useFileUpload(storage as FirebaseStorage, {
+    accept: 'image/png, image/jpeg, image/jpg, image/webp',
+    multiple: false,
+    path: `productos`
+  })
+
+  const {
+    onChange,
+    multiple,
+    accept,
+    files,
+    onUpload,
+    isCompleted,
+    onUploadComplete,
+    loading
+  } = _input
+
+  useEffect( () => {
+    if (files.length > 0) {
+      const uploadFiles = async () => {
+        await onUpload()
+        console.log(files)
+      }
+      uploadFiles()
+    }
+  }, [files])
+
+  const handleUpdate = async () => {
+    // await onUpload()
+    console.log(files)
+  }
 
   return (
     <>
@@ -93,7 +132,7 @@ export const NewDish = () => {
               <label htmlFor="image" className="text-sm font-bold text-gray-700 mb-2 block">Imagen</label>
               <input type="file" className=" appearance-none text-gray-700 border rounded w-full py-2 px-3 shadow leading-tight
               focus:outline-none focus:shadow-none " id="image" placeholder="imagen del platillo"
-              value={formik.values.image} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+              onChange={onChange} multiple={multiple} accept={accept}/>
             </div>
             <div className="mb-4">
               <label htmlFor="description" className="text-sm font-bold text-gray-700 mb-2 block">Descripción</label>
@@ -107,7 +146,7 @@ export const NewDish = () => {
                 </div>
               )}
             </div>
-            <input type="submit" value="Agregar Platillo" 
+            <input type="submit" value={loading ? 'Subiendo imagen...' : 'Agregar Platillo'} disabled={loading} 
             className="bg-gray-800 hover:bg-gray-900 w-full rounded-md mt-5 p-2 text-white uppercase font-bold hover:cursor-pointer"/>
           </form>
         </div>
