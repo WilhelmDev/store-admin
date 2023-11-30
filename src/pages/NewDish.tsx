@@ -51,7 +51,7 @@ export const NewDish = () => {
   const _input = useFileUpload(storage as FirebaseStorage, {
     accept: 'image/png, image/jpeg, image/jpg, image/webp',
     multiple: false,
-    path: `productos`
+    path: `productos`,
   })
 
   const {
@@ -74,11 +74,6 @@ export const NewDish = () => {
       uploadFiles()
     }
   }, [files])
-
-  const handleUpdate = async () => {
-    // await onUpload()
-    console.log(files)
-  }
 
   return (
     <>
@@ -146,7 +141,7 @@ export const NewDish = () => {
                 </div>
               )}
             </div>
-            <input type="submit" value={loading ? 'Subiendo imagen...' : 'Agregar Platillo'} disabled={loading} 
+            <input type="submit" value={loading ? 'Subiendo imagen...' : 'Agregar Platillo'} disabled={loading}
             className="bg-gray-800 hover:bg-gray-900 w-full rounded-md mt-5 p-2 text-white uppercase font-bold hover:cursor-pointer"/>
           </form>
         </div>
