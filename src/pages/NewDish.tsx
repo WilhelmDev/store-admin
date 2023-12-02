@@ -6,9 +6,10 @@ import { Firestore, addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useFileUpload } from 'react-firebase-file-upload'
 import { FirebaseStorage } from "firebase/storage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const NewDish = () => {
+  const [sendingForm, setSendingForm] = useState(false)
 
   const { db, storage } = useFirebase()
   const navigate = useNavigate()
@@ -37,12 +38,16 @@ export const NewDish = () => {
 
     }),
     onSubmit: async dish => {
+      console.log(dish)
+      setSendingForm(true)
       try {
         const doc = await addDoc(collection(db as Firestore, "products"), dish)
         console.log(doc)
+      setSendingForm(false)
         //? Redirect after save data
         navigate('/menu')
       } catch (error) {
+      setSendingForm(false)
         console.log(error)
       }
     }
@@ -60,8 +65,7 @@ export const NewDish = () => {
     accept,
     files,
     onUpload,
-    isCompleted,
-    onUploadComplete,
+    downloadURL,
     loading
   } = _input
 
@@ -69,18 +73,31 @@ export const NewDish = () => {
     if (files.length > 0) {
       const uploadFiles = async () => {
         await onUpload()
-        console.log(files)
       }
       uploadFiles()
     }
   }, [files])
 
+  useEffect( () => {
+    if (downloadURL.length > 0) {
+      formik.values.image = downloadURL[0]
+      // Todo: Add unique id for each file
+    }
+  }, [downloadURL])
+
   return (
     <>
       <div className="text-3xl font-light">Agregar platillo</div>
-
-      <div className="flex justify-center mt-10">
-        <div className=" w-full max-w-2xl">
+      <main className="flex justify-center mt-10 flex-col md:flex-row">
+        <section className=" md:w-1/2">
+          <div className="mb-4 justify-center ">
+            {downloadURL &&
+              downloadURL.map((url, index) => (
+                <img key={index} src={url} alt='uploaded' />
+              ))}
+          </div>
+        </section>
+        <section className=" md:w-1/2">
           <form onSubmit={formik.handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="text-sm font-bold text-gray-700 mb-2 block">Nombre</label>
@@ -141,11 +158,12 @@ export const NewDish = () => {
                 </div>
               )}
             </div>
-            <input type="submit" value={loading ? 'Subiendo imagen...' : 'Agregar Platillo'} disabled={loading}
-            className="bg-gray-800 hover:bg-gray-900 w-full rounded-md mt-5 p-2 text-white uppercase font-bold hover:cursor-pointer"/>
+            <input type="submit" value={loading ? 'Subiendo imagen...' : sendingForm ? 'Cargando platillo...' : 'Añadir platillo'} disabled={!loading || sendingForm}
+            className="bg-gray-800 hover:bg-gray-900 w-full rounded-md mt-5 p-2 text-white uppercase font-bold 
+            hover:cursor-pointer disabled:bg-gray-700 disabled:hover:cursor-wait"/>
           </form>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   )
 }
