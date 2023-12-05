@@ -41,8 +41,7 @@ export const NewDish = () => {
       console.log(dish)
       setSendingForm(true)
       try {
-        const doc = await addDoc(collection(db as Firestore, "products"), dish)
-        console.log(doc)
+        await addDoc(collection(db as Firestore, "products"), dish)
       setSendingForm(false)
         //? Redirect after save data
         navigate('/menu')
@@ -145,6 +144,11 @@ export const NewDish = () => {
               <input type="file" className=" appearance-none text-gray-700 border rounded w-full py-2 px-3 shadow leading-tight
               focus:outline-none focus:shadow-none " id="image" placeholder="imagen del platillo"
               onChange={onChange} multiple={multiple} accept={accept}/>
+              {loading && (
+                <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-500 p-3 rounded" role="alert">
+                  <p className="font-bold">Subiendo imagen, por favor espere...</p>
+              </div>
+              )}
             </div>
             <div className="mb-4">
               <label htmlFor="description" className="text-sm font-bold text-gray-700 mb-2 block">Descripción</label>
@@ -158,7 +162,7 @@ export const NewDish = () => {
                 </div>
               )}
             </div>
-            <input type="submit" value={loading ? 'Subiendo imagen...' : sendingForm ? 'Cargando platillo...' : 'Añadir platillo'} disabled={!loading || sendingForm}
+            <input type="submit" value={loading ? 'Subiendo imagen...' : sendingForm ? 'Cargando platillo...' : 'Añadir platillo'} disabled={loading || sendingForm}
             className="bg-gray-800 hover:bg-gray-900 w-full rounded-md mt-5 p-2 text-white uppercase font-bold 
             hover:cursor-pointer disabled:bg-gray-700 disabled:hover:cursor-wait"/>
           </form>
