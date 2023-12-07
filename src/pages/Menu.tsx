@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useFirebase from '../hooks/useFirebase'
 import { Dishes } from '../interfaces/dishes'
+import { Dish } from '../components/Dish'
 const Menu = () => {
 
   const [dishes, setDishes] = useState<Dishes[]>([])
@@ -35,6 +36,10 @@ const Menu = () => {
       <Link to={'/new-dish'} className='bg-blue-800 hover:bg-blue-700 inline-block mb-5 p-2 text-white uppercase font-bold'>
         Nuevo Platillo
       </Link>
+
+      {dishes && dishes.map((dish => (
+        <Dish  key={dish.id} dish={dish} />
+      )))}
     </>
   )
 }

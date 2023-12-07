@@ -7,3 +7,7 @@ export interface Dishes {
         image: string,
         price: number
 }
+
+export interface DishProps {
+        dish:Dishes
+}
