@@ -11,13 +11,13 @@ import firebase, { FirebaseContext } from './firebase'
 
 const router = createBrowserRouter([
   {
+    index: true,
+    element: <App />
+  },
+  {
     path: '/',
     element: <Sidebar />,
     children: [
-      {
-        index: true,
-        element: <App />
-      },
       {
         path: '/orders',
         element: <Orders />
@@ -32,18 +32,6 @@ const router = createBrowserRouter([
       }
     ]
   },
-  {
-    path: '/orders',
-    element: <Orders />
-  },
-  {
-    path: '/menu',
-    element: <Menu />
-  },
-  {
-    path: '/new-dish',
-    element: <NewDish />
-  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
