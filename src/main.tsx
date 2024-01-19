@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -8,6 +7,7 @@ import Menu from './pages/Menu.tsx';
 import { NewDish } from './pages/NewDish.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
 import firebase, { FirebaseContext } from './firebase'
+// import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         element: <Orders />
       },
       {
-        path: '/menu',
+        path: '/home',
         element: <Menu />
       },
       {

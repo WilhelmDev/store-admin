@@ -37,9 +37,11 @@ const Menu = () => {
         Nuevo Platillo
       </Link>
 
+      <section className=' d-flex md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 auto-rows-auto'>
       {dishes && dishes.map((dish => (
         <Dish  key={dish.id} dish={dish} />
       )))}
+      </section>
     </>
   )
 }

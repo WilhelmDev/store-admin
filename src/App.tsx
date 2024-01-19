@@ -26,9 +26,9 @@ function App() {
     }
   })
 
-  const setToken = (token:string) => {
-    localStorage.setItem('token', token )
-  }
+  // const setToken = (token:string) => {
+  //   localStorage.setItem('token', token )
+  // }
 
   return (
     <>

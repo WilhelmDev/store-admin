@@ -4,7 +4,7 @@ import { Firestore, doc, updateDoc } from "firebase/firestore"
 
 export const Dish = ({ dish }:DishProps) => {
   const { db } = useFirebase()
-  const { id, name, price, image, existency, category, description} = dish
+  const { id, name, price, image, existency } = dish
   // Update data in firebase
   const updateExistency = async (e:string) => {
     const docRef = doc(db as Firestore, 'products', id)
@@ -13,19 +13,14 @@ export const Dish = ({ dish }:DishProps) => {
     })
   }
   return (
-    <div className="w-full px-3 mb-4">
-      <div className="p-5 shadow-md bg-white">
-        <div className=" lg:flex">
-          <div className=" lg:w-5/12 xl:w-3/12">
-            <img src={image} alt={`image ${name}`} />
-          </div>
-          <div className=" lg:w-7/12 xl:w-9/12 lg:pl-5">
+    <div className="w-full px-3">
+      <div className="p-5 shadow-md bg-white ">
+        <main className="flex flex-col gap-2">
+          <section className=" border-b border-gray-100 rounded shadow-sm">
+            <img src={image} alt={`image ${name}`} className="rounded aspect-square"/>
+          </section>
+          <section className="">
             <p className=" font-bold text-2xl text-yellow-600 mb-4">{name}</p>
-            <p className="text-gray-600 mb-4">
-              Categoria: 
-              <span className="text-gray-700 font-bold"> {category.toUpperCase()}</span>
-            </p>
-            <p className="text-gray-600 mb-4">{description}</p>
             <p className="text-gray-600 mb-3">
               Precio: 
               <span className="text-gray-700 font-bold"> {price}$</span>
@@ -38,8 +33,8 @@ export const Dish = ({ dish }:DishProps) => {
                 <option value="false">No Disponible</option>
               </select>
             </label>
-          </div>
-        </div>
+          </section>
+        </main>
       </div>
     </div>
   )
