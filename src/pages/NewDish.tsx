@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { useFileUpload } from 'react-firebase-file-upload'
 import { FirebaseStorage } from "firebase/storage";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 export const NewDish = () => {
   const [sendingForm, setSendingForm] = useState(false)
@@ -21,7 +22,9 @@ export const NewDish = () => {
       category: '',
       image: '',
       description: '',
-      existency: true
+      active: true,
+      code: uuidv4(),
+      
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -38,13 +41,14 @@ export const NewDish = () => {
 
     }),
     onSubmit: async dish => {
+      dish.code = uuidv4()
       console.log(dish)
       setSendingForm(true)
       try {
         await addDoc(collection(db as Firestore, "products"), dish)
       setSendingForm(false)
         //? Redirect after save data
-        navigate('/menu')
+        navigate('/home')
       } catch (error) {
       setSendingForm(false)
         console.log(error)

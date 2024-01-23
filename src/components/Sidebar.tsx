@@ -15,7 +15,7 @@ export const Sidebar = () => {
             isActive ? "text-yellow-400" : "text-gray-400",
             "p-1 block hover:bg-yellow-500 hover:text-gray-900",
             ].join(" ")}>
-              Menu
+              Inventario
             </NavLink>
             <NavLink to={'/orders'} className={({ isActive}) => [
             isActive ? "text-yellow-400" : "text-gray-400",

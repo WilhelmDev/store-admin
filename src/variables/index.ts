@@ -1,26 +1,30 @@
 export const categories = [
     {
-        name: 'Desayuno',
+        name: 'Viveres',
         value: 'desayuno'
     },
+    // {
+    //     name: 'Charcuteria',
+    //     value: 'charcuteria'
+    // },
     {
-        name: 'Comida',
-        value: 'comida'
-    },
-    {
-        name: 'Cena',
-        value: 'cena'
+        name: 'Licores',
+        value: 'licores'
     },
     {
         name: 'Bebidas',
         value: 'bebidas'
     },
     {
-        name: 'Postre',
-        value: 'postre'
+        name: 'Enlatados',
+        value: 'enlatados'
     },
     {
-        name: 'Ensalada',
-        value: 'ensalada'
+        name: 'Higiene Personal',
+        value: 'higiene-personal'
     },
+    {
+        name: 'Otros',
+        value: 'otros'
+    }
 ]
