@@ -29,7 +29,7 @@ const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
       toast.error('Su sesión ha expirado, inicie sesion de nuevo')
       return
     }
-    const data = await clientInstance.get('/users/data', { headers: { Authorization: token }})
+    const data = await clientInstance.get('/users/data', { headers: { Authorization: 'Bearer ' + token }})
     return data
   }
     return (

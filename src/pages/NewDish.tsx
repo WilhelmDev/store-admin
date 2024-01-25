@@ -22,9 +22,9 @@ export const NewDish = () => {
       category: '',
       image: '',
       description: '',
-      active: true,
+      active: false,
       code: uuidv4(),
-      
+      existency: 1
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -42,7 +42,6 @@ export const NewDish = () => {
     }),
     onSubmit: async dish => {
       dish.code = uuidv4()
-      console.log(dish)
       setSendingForm(true)
       try {
         await addDoc(collection(db as Firestore, "products"), dish)

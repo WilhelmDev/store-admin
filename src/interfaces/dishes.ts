@@ -1,6 +1,7 @@
 export interface Dishes {
         id: string,
-        existency: boolean,
+        active: boolean,
+        existency: number,
         name: string,
         description: string,
         category: string,
