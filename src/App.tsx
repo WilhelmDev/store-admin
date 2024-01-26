@@ -1,4 +1,9 @@
+import { BuildingStorefrontIcon, Cog6ToothIcon, InboxIcon, PowerIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { PresentationChartBarIcon } from '@heroicons/react/24/solid'
+import { Card, Chip, List, ListItem, ListItemPrefix, ListItemSuffix, Typography } from '@material-tailwind/react'
 import { useFormik } from 'formik'
+import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 function App() {
 
@@ -32,7 +37,59 @@ function App() {
 
   return (
     <>
-      <main className=' min-h-screen flex items-center justify-center'>
+    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+      <div className="mb-2 p-4">
+        <Typography variant="h5" color="blue-gray">
+          Administra tu negocio
+        </Typography>
+      </div>
+      <List>
+        <ListItem>
+          <ListItemPrefix>
+            <PresentationChartBarIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Dashboard
+        </ListItem>
+        <NavLink to={'/orders'} className={({ isActive}) => [
+        !isActive ? "text-yellow-400" : "text-gray-400"
+        ].join(" ")}>
+          <ListItem>
+            <ListItemPrefix>
+              <BuildingStorefrontIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Inventario
+          </ListItem>
+        </NavLink>
+        <ListItem>
+          <ListItemPrefix>
+            <InboxIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Inbox
+          <ListItemSuffix>
+            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+          </ListItemSuffix>
+        </ListItem>
+        <ListItem>
+          <ListItemPrefix>
+            <UserCircleIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Profile
+        </ListItem>
+        <ListItem>
+          <ListItemPrefix>
+            <Cog6ToothIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Settings
+        </ListItem>
+        <ListItem>
+          <ListItemPrefix>
+            <PowerIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Log Out
+        </ListItem>
+      </List>
+    </Card>
+      {/* <main className=' min-h-screen flex items-center justify-center'>
         <div className='lg:w-1/3 bg-purple-800 px-8 py-6 rounded-xl flex flex-col gap-2'>
           <h1 className=' font-bold text-3xl text-white text-center'>
             Inicie sesión
@@ -64,7 +121,7 @@ function App() {
             className='mt-4 bg-yellow-400 rounded-xl px-3 py-2 text-purple-800 font-bold text-lg md:w-2/3 md:mx-auto hover:cursor-pointer'/>
           </form>
         </div>
-      </main>
+      </main> */}
     </>
   )
 }

@@ -1,15 +1,18 @@
 import { DishProps } from "../interfaces/dishes"
 import useFirebase from "../hooks/useFirebase"
 import { Firestore, doc, updateDoc } from "firebase/firestore"
+import { Switch } from "@material-tailwind/react";
 
 export const Dish = ({ dish }:DishProps) => {
   const { db } = useFirebase()
   const { id, name, price, image, existency, active } = dish
   // Update data in firebase
-  const updateActive = async (e:string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleActive = async (value : any) => {
+    const actualValue = value.target.value === 'true' ? true : false
     const docRef = doc(db as Firestore, 'products', id)
     await updateDoc(docRef, {
-      active: (e === 'true')
+      active: !actualValue
     })
   }
   return (
@@ -25,15 +28,10 @@ export const Dish = ({ dish }:DishProps) => {
               Precio: 
               <span className="text-gray-700 font-bold"> {price}$</span>
             </p>
-            <p className="text-gray-800 mb-3">Existencia: {existency}</p>
-            <label htmlFor="disp">
-              <span className="text-gray-800">Activo: </span>
-              <select name="disp" id="disp" className="shadow appearance-none border rounded text-center px-2 py-1 leading-tight focus:outline-none focus:shadow"
-              value={active.toString()} onChange={(e) => updateActive(e.target.value)}>
-                <option value="true">Disponible</option>
-                <option value="false">No Disponible</option>
-              </select>
-            </label>
+            <p className="text-gray-800 mb-3">Existente: {existency}</p>
+            <div className="mt-3">
+              <Switch crossOrigin={undefined} color="yellow" checked={active} value={active.toString()} label={'Activo'} onChange={handleActive}/>
+            </div>
           </section>
         </main>
       </div>
