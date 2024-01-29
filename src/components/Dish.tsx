@@ -2,9 +2,12 @@ import { DishProps } from "../interfaces/dishes"
 import useFirebase from "../hooks/useFirebase"
 import { Firestore, doc, updateDoc } from "firebase/firestore"
 import { Switch } from "@material-tailwind/react";
+import useStore from "../hooks/useStore";
+import { StoreContextProps } from "../interfaces/store";
 
 export const Dish = ({ dish }:DishProps) => {
   const { db } = useFirebase()
+  const { dialogTrigger } = useStore() as StoreContextProps
   const { id, name, price, image, existency, active } = dish
   // Update data in firebase
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +23,7 @@ export const Dish = ({ dish }:DishProps) => {
       <div className="p-5 shadow-md bg-white ">
         <main className="flex flex-col gap-2">
           <section className=" border-b border-gray-100 rounded shadow-sm">
-            <img src={image} alt={`image ${name}`} className="rounded aspect-square"/>
+            <img src={image} alt={`image ${name}`} className="rounded aspect-square" onClick={() => dialogTrigger(dish)}/>
           </section>
           <section className="">
             <p className=" font-bold text-2xl text-yellow-600 mb-4">{name}</p>

@@ -8,6 +8,7 @@ import Menu from './pages/Menu.tsx';
 import { NewDish } from './pages/NewDish.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
 import firebase, { FirebaseContext } from './firebase'
+import StoreProvider from './context/store.tsx';
 // import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
@@ -39,7 +40,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
     <FirebaseContext.Provider value={firebase}>
       <ThemeProvider>
-        <RouterProvider router={router} />
+        <StoreProvider>
+          <RouterProvider router={router} />
+        </StoreProvider>
       </ThemeProvider>
     </FirebaseContext.Provider>
   </>,

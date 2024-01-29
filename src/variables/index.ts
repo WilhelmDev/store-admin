@@ -1,7 +1,7 @@
 export const categories = [
     {
         name: 'Viveres',
-        value: 'desayuno'
+        value: 'viveres'
     },
     // {
     //     name: 'Charcuteria',
