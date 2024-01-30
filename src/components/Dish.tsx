@@ -23,7 +23,7 @@ export const Dish = ({ dish }:DishProps) => {
       <div className="p-5 shadow-md bg-white ">
         <main className="flex flex-col gap-2">
           <section className=" border-b border-gray-100 rounded shadow-sm">
-            <img src={image} alt={`image ${name}`} className="rounded aspect-square" onClick={() => dialogTrigger(dish)}/>
+            <img src={image} alt={`image ${name}`} className="rounded aspect-square cursor-pointer" onClick={() => dialogTrigger(dish)}/>
           </section>
           <section className="">
             <p className=" font-bold text-2xl text-yellow-600 mb-4">{name}</p>

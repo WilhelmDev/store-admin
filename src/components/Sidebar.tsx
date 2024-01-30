@@ -16,9 +16,9 @@ export const Sidebar = () => {
       </div>
       <List>
         <NavLink to={'/home'} className={({ isActive}) => [
-        isActive && 'text-yellow-400'
+        isActive && 'text-yellow-600'
         ].join(" ")}>
-          <ListItem disabled={location.pathname === '/home'} className={ location.pathname === '/home' ? '!text-yellow-400 border border-yellow-400 !opacity-100' : ''} >
+          <ListItem disabled={location.pathname === '/home'} className={ location.pathname === '/home' ? '!text-yellow-600 border border-yellow-600 !opacity-100' : ''} >
             <ListItemPrefix>
               <BuildingStorefrontIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -26,7 +26,7 @@ export const Sidebar = () => {
           </ListItem>
         </NavLink>
         <NavLink to={'/orders'}>
-          <ListItem disabled={location.pathname === '/orders'} className={ location.pathname === '/orders' ? '!text-yellow-400 !opacity-100 border border-yellow-400' : ''}>
+          <ListItem disabled={location.pathname === '/orders'} className={ location.pathname === '/orders' ? '!text-yellow-600 !opacity-100 border border-yellow-600' : ''}>
             <ListItemPrefix>
               <DocumentIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -40,7 +40,7 @@ export const Sidebar = () => {
           Trabajadores
         </ListItem>
         <NavLink to={'/'} className={({ isActive}) => [
-        isActive && "text-yellow-400"
+        isActive && "text-yellow-600"
         ].join(" ")}>
           <ListItem disabled={location.pathname === '/'}>
             <ListItemPrefix>
