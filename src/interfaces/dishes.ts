@@ -6,7 +6,8 @@ export interface Dishes {
         description: string,
         category: string,
         image: string,
-        price: number
+        price: number,
+        code: string
 }
 
 export interface DishProps {
