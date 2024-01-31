@@ -20,10 +20,10 @@ const StoreProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
     }
   }
 
-  const deleteProduct = async (code:string) => {
+  const deleteProduct = async (id:string) => {
     setLoading(true)
     try {
-      await deleteDoc(doc(db as Firestore, "products/", code));
+      await deleteDoc(doc(db as Firestore, "products", id));
     } catch (error) {
       console.log(error)
     } finally {

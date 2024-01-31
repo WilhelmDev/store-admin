@@ -8,15 +8,15 @@ import { TrashIcon } from '@heroicons/react/24/solid'
 export default function ModalProduct() {
   
   const { dialogProduct, dialogTrigger, selectedProduct, deleteProduct, loading } = useStore() as StoreContextProps
-  const { image, name, category, price, existency, description, active, code } = selectedProduct as Dishes
+  const { image, name, category, price, existency, description, active, id } = selectedProduct as Dishes
   return (
     <Dialog open={dialogProduct} handler={dialogTrigger} size='lg'>
         <DialogHeader className='flex justify-between'>
           <Typography variant='h3'>
             Editar producto
           </Typography>
-          <Button className='flex items-center gap-3 transition hover:bg-red-500 hover:text-white focus:ring-1' variant='outlined' color='red'
-          onClick={() => deleteProduct(code)} loading={loading}>
+          <Button className='flex items-center gap-3 transition hover:bg-red-500 hover:text-white focus:!ring-1 focus:!ring-red-600' variant='outlined' color='red'
+          onClick={() => deleteProduct(id)} loading={loading}>
             Eliminar
             <TrashIcon className='h-5 w-5'/>
           </Button>
