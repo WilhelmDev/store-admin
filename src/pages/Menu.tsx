@@ -32,7 +32,7 @@ const Menu = () => {
   }, [])
 
   return (
-    <>
+    <main className='p-2'>
       <div className="mb-4 text-lg">
         Inventario
       </div>
@@ -51,7 +51,7 @@ const Menu = () => {
       )))}
       </section>
       <ModalProduct />
-    </>
+    </main>
   )
 }
 
