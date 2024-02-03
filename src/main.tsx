@@ -3,7 +3,7 @@ import App from './App.tsx'
 import { ThemeProvider } from "@material-tailwind/react";
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Orders } from './pages/Orders.tsx';
+import { Bills } from './pages/Orders.tsx';
 import Menu from './pages/Menu.tsx';
 import { NewDish } from './pages/NewDish.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
     element: <Sidebar />,
     children: [
       {
-        path: '/orders',
-        element: <Orders />
+        path: '/bills',
+        element: <Bills />
       },
       {
         path: '/home',
