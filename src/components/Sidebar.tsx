@@ -33,12 +33,14 @@ export const Sidebar = () => {
               Facturas
             </ListItem>
           </NavLink>
-          <ListItem>
-            <ListItemPrefix>
-              <UserIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Trabajadores
-          </ListItem>
+          <NavLink to={'/workpeople'}>
+            <ListItem disabled={location.pathname === '/workpeople'} className={ location.pathname === '/workpeople' ? '!text-yellow-600 !opacity-100 border border-yellow-600' : ''}>
+              <ListItemPrefix>
+                <UserIcon className="h-5 w-5" />
+              </ListItemPrefix>
+              Trabajadores
+            </ListItem>
+          </NavLink>
           <NavLink to={'/'} className={({ isActive}) => [
           isActive && "text-yellow-600"
           ].join(" ")}>

@@ -9,6 +9,7 @@ import { NewDish } from './pages/NewDish.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
 import firebase, { FirebaseContext } from './firebase'
 import StoreProvider from './context/store.tsx';
+import Workpeople from './pages/Workpeople.tsx';
 // import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/new-dish',
         element: <NewDish />
+      },
+      {
+        path: '/workpeople',
+        element: <Workpeople />
       }
     ]
   },
