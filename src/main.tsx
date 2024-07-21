@@ -7,9 +7,10 @@ import { Bills } from './pages/Orders.tsx';
 import Menu from './pages/Menu.tsx';
 import { NewDish } from './pages/NewDish.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
-import firebase, { FirebaseContext } from './firebase'
-import StoreProvider from './context/store.tsx';
+
+// import StoreProvider from './context/store.tsx';
 import Workpeople from './pages/Workpeople.tsx';
+import FirebaseProvider from './firebase/context.tsx';
 // import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
@@ -43,12 +44,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
-    <FirebaseContext.Provider value={firebase}>
+    <FirebaseProvider>
       <ThemeProvider>
-        <StoreProvider>
+        {/* <StoreProvider> */}
           <RouterProvider router={router} />
-        </StoreProvider>
+        {/* </StoreProvider> */}
       </ThemeProvider>
-    </FirebaseContext.Provider>
+    </FirebaseProvider>
   </>,
 )

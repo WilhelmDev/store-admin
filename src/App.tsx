@@ -1,37 +1,43 @@
+import { Button } from "@material-tailwind/react";
+import { useFormik } from "formik"
+import * as Yup from 'yup'
+import useFirebase from "./hooks/useFirebase";
 
 function App() {
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: '',
-  //     password: ''
-  //   },
-  //   validationSchema: Yup.object({
-  //     email: Yup.string()
-  //       .required('El email es obligatorio')
-  //       .email('El formato es incorrecto'),
-  //     password: Yup.string()
-  //       .min(3, 'La contraseña es demasiada corta')
-  //       .required('La contraseña es obligatoria'),
-  //   }),
-  //   onSubmit: async (credentials) => {
-  //     // const data = await LoginUser(credentials)
-  //     // if (!data.ok) {
-  //     //   toast.info(data.msg)
-  //     //   return
-  //     // }
-  //     // toast.success('Bienvenido')
-  //     console.log(credentials)
-  //   }
-  // })
+  const { handleLoginWithPopUp } = useFirebase()
 
-  // const setToken = (token:string) => {
-  //   localStorage.setItem('token', token )
-  // }
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .required('El email es obligatorio')
+        .email('El formato es incorrecto'),
+      password: Yup.string()
+        .min(3, 'La contraseña es demasiada corta')
+        .required('La contraseña es obligatoria'),
+    }),
+    onSubmit: async (credentials) => {
+      // const data = await LoginUser(credentials)
+      // if (!data.ok) {
+      //   toast.info(data.msg)
+      //   return
+      // }
+      // toast.success('Bienvenido')
+      console.log(credentials)
+    }
+  })
+
+  const handleClickLogin = async () => {
+    await handleLoginWithPopUp()
+  }
 
   return (
     <>
-      {/* <main className=' min-h-screen flex items-center justify-center'>
+      <main className=' min-h-screen flex items-center justify-center'>
         <div className='lg:w-1/3 bg-purple-800 px-8 py-6 rounded-xl flex flex-col gap-2'>
           <h1 className=' font-bold text-3xl text-white text-center'>
             Inicie sesión
@@ -59,11 +65,14 @@ function App() {
                   </div>
                 )}
             </div>
-            <input type="submit" value="Ingresar"
-            className='mt-4 bg-yellow-400 rounded-xl px-3 py-2 text-purple-800 font-bold text-lg md:w-2/3 md:mx-auto hover:cursor-pointer'/>
+            <Button type="button" 
+            className="text-white" variant="filled" size="lg" color="blue" 
+            onClick={() => handleClickLogin()}>
+              Login google
+            </Button>
           </form>
         </div>
-      </main> */}
+      </main>
     </>
   )
 }
