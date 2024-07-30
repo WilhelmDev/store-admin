@@ -2,10 +2,17 @@ import { Button } from "@material-tailwind/react";
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import useFirebase from "./hooks/useFirebase";
+import AlertClose from "./components/common/Alert";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { routes } from "./constants/routes";
 
 function App() {
+  const [alert, setAlert] = useState(false)
+  const [message, setMessage] = useState('')
 
   const { handleLoginWithPopUp } = useFirebase()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -32,11 +39,28 @@ function App() {
   })
 
   const handleClickLogin = async () => {
-    await handleLoginWithPopUp()
+    try {
+      await handleLoginWithPopUp()
+      setMessage('Iniciando sesión...')
+      setTimeout(() => {
+        navigate(routes.Dashboard)
+      }, 1500);
+    } catch (error) {
+      setMessage('Hubo un error al iniciar sesión')
+    } finally {
+      setAlert(true)
+    }
+  }
+
+  const handleCloseAlert = () => {
+    setAlert(false)
   }
 
   return (
     <>
+      {alert && (
+        <AlertClose handleClose={handleCloseAlert} message={message} closeText={"Cerrar"} />
+      )}
       <main className=' min-h-screen flex items-center justify-center'>
         <div className='lg:w-1/3 bg-purple-800 px-8 py-6 rounded-xl flex flex-col gap-2'>
           <h1 className=' font-bold text-3xl text-white text-center'>
@@ -65,7 +89,7 @@ function App() {
                   </div>
                 )}
             </div>
-            <Button type="button" 
+            <Button type="button"
             className="text-white" variant="filled" size="lg" color="blue" 
             onClick={() => handleClickLogin()}>
               Login google

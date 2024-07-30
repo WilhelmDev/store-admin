@@ -11,6 +11,8 @@ import { Sidebar } from './components/Sidebar.tsx';
 // import StoreProvider from './context/store.tsx';
 import Workpeople from './pages/Workpeople.tsx';
 import FirebaseProvider from './firebase/context.tsx';
+import { routes } from './constants/routes.ts';
+import StoreProvider from './context/store.tsx';
 // import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
@@ -27,7 +29,7 @@ const router = createBrowserRouter([
         element: <Bills />
       },
       {
-        path: '/home',
+        path: routes.Dashboard,
         element: <Menu />
       },
       {
@@ -46,9 +48,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
     <FirebaseProvider>
       <ThemeProvider>
-        {/* <StoreProvider> */}
+        <StoreProvider>
           <RouterProvider router={router} />
-        {/* </StoreProvider> */}
+        </StoreProvider>
       </ThemeProvider>
     </FirebaseProvider>
   </>,

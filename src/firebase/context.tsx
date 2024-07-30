@@ -2,14 +2,15 @@ import { createContext } from "react";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Firestore, getFirestore } from "firebase/firestore";
 import { FirebaseStorage, getStorage } from "firebase/storage";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, User } from "firebase/auth";
 import firebaseConfig from "./config";
+import { saveToken } from "../services/localstorage.service";
 
 export interface Contextfirebase {
     app: FirebaseApp;
     db: Firestore;
     storage: FirebaseStorage
-    handleLoginWithPopUp: () => Promise<void>
+    handleLoginWithPopUp: () => Promise<User>
 }
 
 const FirebaseContext = createContext<Partial<Contextfirebase>>({})
@@ -25,9 +26,12 @@ const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ children })
   const handleLoginWithPopUp = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      console.log('Logged in with:', result.user);
+      const tokenUser = await result.user.getIdToken()
+      saveToken(tokenUser)
+      return result.user
     } catch (error) {
       console.error('Error signing in with popup:', error);
+      throw error;
     }
   }
 

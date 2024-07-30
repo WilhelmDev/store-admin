@@ -2,12 +2,13 @@ import { NavLink, Outlet, useLocation} from 'react-router-dom'
 import { BuildingStorefrontIcon, Cog6ToothIcon, DocumentIcon, UserIcon } from '@heroicons/react/24/solid'
 import { PresentationChartBarIcon } from '@heroicons/react/24/solid'
 import { Card, List, ListItem, ListItemPrefix, Typography } from '@material-tailwind/react'
+import { routes } from '../constants/routes'
 export const Sidebar = () => {
 
   const location = useLocation()
   return (
     <div className='md:flex'>
-      <div className=" md:w-1/5 xl:w-1/5 min-h-screen">
+      <div className="md:w-1/5 xl:w-1/5 min-h-screen">
         <Card className=" h-screen w-full p-4 shadow-xl shadow-blue-gray-900/5">
         <div className="mb-2 p-4">
           <Typography variant="h5" color="blue-gray" className='text-center'>
@@ -15,10 +16,10 @@ export const Sidebar = () => {
           </Typography>
         </div>
         <List>
-          <NavLink to={'/home'} className={({ isActive}) => [
+          <NavLink to={routes.Dashboard} className={({ isActive}) => [
           isActive && 'text-yellow-600'
           ].join(" ")}>
-            <ListItem disabled={location.pathname === '/home'} className={ location.pathname === '/home' ? '!text-yellow-600 border border-yellow-600 !opacity-100' : ''} >
+            <ListItem disabled={location.pathname === routes.Dashboard} className={ location.pathname === routes.Dashboard ? '!text-yellow-600 border border-yellow-600 !opacity-100' : ''} >
               <ListItemPrefix>
                 <BuildingStorefrontIcon className="h-5 w-5" />
               </ListItemPrefix>
